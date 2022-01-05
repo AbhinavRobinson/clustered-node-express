@@ -17,7 +17,9 @@ export const worker = (port: number) => {
     }, 200)
   })
 
-  app.listen(port, () =>
-    console.log(`❄️ Process:${pid} listening on port ${port}!`)
-  )
+  app.listen(port)
+
+  process.on('message', (msg) => {
+    console.log(`[worker:${pid}]: ${msg}`)
+  })
 }
