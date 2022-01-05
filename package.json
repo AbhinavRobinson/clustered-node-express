@@ -6,9 +6,11 @@
   "author": "Abhinav Robinson <abhinavrobinson@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "nodemon  --exec 'ts-node-dev' ./src/entrypoint.ts",
+    "dev": "nodemon  --exec 'ts-node-dev' ./src/entrypoint.ts",
+    "predev": "eslint --fix --ext .ts,.js src",
     "build": "tsc",
-    "prestart": "eslint --fix --ext .ts,.js src"
+    "prebuild": "eslint --fix --ext .ts,.js src",
+    "start": "nodemon ./build/entrypoint.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.12",
