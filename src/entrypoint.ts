@@ -35,6 +35,12 @@ if (cluster.isMaster) {
     worker.send(`${worker.id}`)
   })
   console.log(`[master]: ${cpus} listening to ${port}`)
+  cluster.on('exit', (worker, code) => {
+    if (code !== 0 && !worker.exitedAfterDisconnect) {
+      console.log(`Worker ${worker.id} crashed. ` + 'Starting a new worker...')
+      cluster.fork()
+    }
+  })
 } else {
   worker(parseInt(process.env.port), process.env.loggerLevel === 'true')
 }
