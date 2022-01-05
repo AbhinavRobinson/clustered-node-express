@@ -11,7 +11,7 @@ if (cluster.isPrimary) {
     cluster.fork()
   }
   Object.values(cluster.workers).forEach((worker) => {
-    worker.send(`Started Worker ${worker.id}`)
+    worker.send(`${worker.id}`)
   })
   console.log(`[primary:${pid}]: ${cpus} listening to ${port}`)
 } else {
